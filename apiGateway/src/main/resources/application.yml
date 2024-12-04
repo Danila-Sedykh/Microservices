@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: producer-service
+          uri: lb://PRODUCER-SERVICE
+          predicates:
+            - Path=/producer/**
+        - id: consumer-service
+          uri: lb://CONSUMER-SERVICE
+          predicates:
+            - Path=/consumer/**
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/micro
+    username: postgres
+    password: 1
+    driver-class-name: org.postgresql.Driver
+
+server:
+  port: 8081
