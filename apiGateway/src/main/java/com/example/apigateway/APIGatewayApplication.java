@@ -1,13 +1,14 @@
+package com.example.apigateway;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
-
-@SpringBootApplication(scanBasePackages = "authService")
+@SpringBootApplication(scanBasePackages = "apiGateway")
 @EnableEurekaServer
-public class AuthServiceApplication {
+public class APIGatewayApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AuthServiceApplication.class, args);
+        SpringApplication.run(APIGatewayApplication.class, args);
         System.out.println("Hello world!");
     }
 }

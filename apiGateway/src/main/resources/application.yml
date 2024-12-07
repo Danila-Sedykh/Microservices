@@ -1,4 +1,8 @@
+
+
 spring:
+  application:
+    name: api-gateway
   cloud:
     gateway:
       routes:
@@ -10,6 +14,11 @@ spring:
           uri: lb://CONSUMER-SERVICE
           predicates:
             - Path=/consumer/**
+        - id: auth-service-route
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**
+
 
   datasource:
     url: jdbc:postgresql://localhost:5432/micro
