@@ -1,5 +1,6 @@
 package com.example.authservice.services;
 
+import com.example.authservice.models.Role;
 import io.jsonwebtoken.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,15 +31,6 @@ public class JwtService {
                 .compact();
     }
 
-    /*public String generateToken(String username, List<String> roles) {
-        return Jwts.builder()
-                .setSubject(username)
-                .claim("roles", roles)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
-                .compact();
-    }*/
 
     public boolean validateToken(String token) {
         try {
@@ -49,16 +41,6 @@ public class JwtService {
         }
     }
 
-    /*public boolean validateToken(String token) {
-        try {
-            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
-            return true;
-        } catch (ExpiredJwtException e) {
-            throw new RuntimeException("Token expired");
-        } catch (Exception e) {
-            return false;
-        }
-    }*/
 
     public String extractUsername(String token) {
         return Jwts.parser()
@@ -68,13 +50,6 @@ public class JwtService {
                 .getSubject();
     }
 
-    /*public String extractUsername(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
-    }*/
 
     public List<SimpleGrantedAuthority> extractRoles(String token) {
         Claims claims = Jwts.parser()
@@ -88,15 +63,7 @@ public class JwtService {
                 .collect(Collectors.toList());
     }
 
-    /*public List<String> extractRoles(String token) {
-        return (List<String>) Jwts.parser()
-                .setSigningKey(SECRET_KEY)
-                .parseClaimsJws(token)
-                .getBody()
-                .get("roles");
-    }*/
+
 }
 
-// проверка на время, что мы можем еще отправить в токене и как это сделать.
-// Что такое new Date() в setIssuedAt()
-// Сохранение в бд и все что с ним связано
+

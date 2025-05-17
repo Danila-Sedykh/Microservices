@@ -2,19 +2,46 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
 spring:
+  application:
+    name: consumer-service
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
+      topic:
+        name: crypto-prices
       group-id: my-group
+
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+    packages:
+      trust-all: true
+    pool:
+      enabled: false
+      max-connections: 1
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/micro
+    url: jdbc:postgresql://localhost:5432/consumer_micro
     username: postgres
     password: 1
     driver-class-name: org.postgresql.Driver
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
 
 server:
   port: 8082
